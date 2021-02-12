@@ -7,6 +7,7 @@ import Login from '../Auth/Login';
 import PrivateRoute from '../Auth/PrivateRoute';
 import ForgotPassword from '../Auth/ForgotPassword';
 import UpdateProfile from '../Auth/UpdateProfile';
+import Dashboard from '../Drive/Dashboard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <AuthProvider>
         <Switch>
           {/* Firedrives */}
+          <PrivateRoute exact path="/" component={Dashboard} />
           {/* Profiles */}
           <PrivateRoute exact path="/user" component={Profile} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
