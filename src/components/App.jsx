@@ -16,6 +16,7 @@ function App() {
         <Switch>
           {/* Firedrives */}
           <PrivateRoute exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/folder/:folderId" component={Dashboard} />
           {/* Profiles */}
           <PrivateRoute exact path="/user" component={Profile} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
