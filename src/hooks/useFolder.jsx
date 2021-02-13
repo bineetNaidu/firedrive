@@ -33,6 +33,12 @@ const reducer = (state, { type, payload }) => {
         childFolders: payload.childFolders,
       };
 
+    case ACTIONS.SET_CHILD_FILES:
+      return {
+        ...state,
+        childFiles: payload.childFiles,
+      };
+
     default:
       return state;
   }
@@ -94,6 +100,21 @@ export function useFolder(folderId = null, folder = null) {
           payload: { childFolders: snapshot.docs.map(database.formatDoc) },
         });
       });
+  }, [folderId, currentUser]);
+
+  useEffect(() => {
+    return (
+      database.files
+        .where('folderId', '==', folderId)
+        .where('userId', '==', currentUser.uid)
+        // .orderBy('createdAt')
+        .onSnapshot((snapshot) => {
+          dispatch({
+            type: ACTIONS.SET_CHILD_FILES,
+            payload: { childFiles: snapshot.docs.map(database.formatDoc) },
+          });
+        })
+    );
   }, [folderId, currentUser]);
 
   return state;
