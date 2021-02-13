@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      function authed(){
+        return request.auth != null
+      }
+      function matchesUser(data){
+        return request.auth.uid == data.userId
+      }
+
+      allow read: if authed() && matchesUser(resource.data)
+      allow create: if authed() && matchesUser(request.resource.data)
+    }
+  }
+}
