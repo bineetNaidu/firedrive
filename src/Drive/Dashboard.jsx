@@ -4,6 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useFolder } from '../hooks/useFolder';
 import AddFolderBtn from './AddFolderBtn';
 import Folder from './Folder';
+import FolderBreadcrumbs from './FolderBreadcrumbs';
 import DriveNavbar from './Navbar';
 
 const Dashboard = () => {
@@ -18,7 +19,10 @@ const Dashboard = () => {
     <>
       <DriveNavbar />
       <Container fluid>
-        <AddFolderBtn currentFolder={folder} />
+        <div className="d-flex align-items-center">
+          <FolderBreadcrumbs currentFolder={folder} />
+          <AddFolderBtn currentFolder={folder} />
+        </div>
         {childFolders?.length > 0 && (
           <div className="d-flex flex-wrap">
             {childFolders.map((childFolder) => (
